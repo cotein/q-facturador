@@ -1,12 +1,17 @@
 <template>
     <q-page
-        class="window-height window-width row flex justify-center "
-        style="background: linear-gradient(#8274C5, #5A4A9F);"
+        class="q-ma-xl"
     >
-        <div class="col-4 col-offset-4 q-ma-lg bg-grey-2">
-            <header class="q-pa-lg">
-                <span class="text-h5 flex justify-center">INICIAR SESION</span>
-            </header>
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-7">
+                <q-img
+                    src="~/assets/img-login.svg"
+                    spinner-color="primary"
+                    spinner-size="82px"
+                />
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <span class="text-h5 flex justify-center q-ma-xl text-login" >INICIAR SESIÓN</span>
                 <q-form
                     @submit="onSubmit"
                     @reset="onReset"
@@ -32,10 +37,10 @@
                     />
 
                     <div>
-                        <q-btn label="Submit" type="submit" color="primary"/>
-                        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+                        <q-btn class="full-width" label="Aceptar" type="submit" color="primary"/>
                     </div>
                 </q-form>
+            </div>
         </div>
     </q-page>
 </template>
@@ -65,8 +70,8 @@ export default {
 }
 </script>
 
-<style>
-    .bg-grey-2{
-        background-color: #e7eaf6;
+<style lang="scss">
+    .text-login{
+        color: $blue-grey-4;
     }
 </style>

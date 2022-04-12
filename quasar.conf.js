@@ -10,7 +10,7 @@
 
 const ESLintPlugin = require('eslint-webpack-plugin')
 
-module.exports = function (/* ctx */) {
+module.exports = function (ctx) {
   return {
     // https://v1.quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -47,8 +47,16 @@ module.exports = function (/* ctx */) {
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
 
+        env : {
+            APP_NAME:"Facturador DiMaIt",
+            APP_API_SERVER:"http://localhost:8000/",
+            APP_SERVER_CLIENT_ID:2,
+            APP_SERVER_CLIENT_SECRET:'FeelUUMkuRAslrQgBO1dqdmYhCunUYos3MEWQwlL',
+            APP_GRANT_TYPE:'password',
+            APP_AFIP_PTO_VTA:1,
+        },
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -77,7 +85,7 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: false,
       port: 8080,
-      open: true // opens browser window automatically
+      open: false // opens browser window automatically
     },
 
     // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
@@ -99,12 +107,16 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
     // https://v1.quasar.dev/options/animations
-    animations: [],
+    animations: [
+        'fadeIn', 'fadeOut'
+    ],
 
     // https://v1.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

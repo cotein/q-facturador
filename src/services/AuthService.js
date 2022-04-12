@@ -8,9 +8,9 @@ export default {
         
         try {
             return await Service.post('/oauth/token', {
-                client_id: process.env.VUE_APP_SERVER_CLIENT_ID,
-                client_secret: process.env.VUE_APP_SERVER_CLIENT_SECRET,
-                grant_type: process.env.VUE_APP_GRANT_TYPE,
+                client_id: process.env.APP_SERVER_CLIENT_ID,
+                client_secret: process.env.APP_SERVER_CLIENT_SECRET,
+                grant_type: process.env.APP_GRANT_TYPE,
                 username: email,
                 password: password,
                 scope: '*', 

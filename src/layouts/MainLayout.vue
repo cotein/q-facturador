@@ -1,9 +1,9 @@
 <template>
     <div class="q-pa-md">
         <q-layout view="lHh Lpr lff">
-            <q-header elevated class="bg-cyan-8">
+            <q-header elevated class="bg-indigo-10">
                 <q-toolbar>
-                    <q-toolbar-title>Header</q-toolbar-title>
+                    <q-toolbar-title>Facturador</q-toolbar-title>
                     <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
                 </q-toolbar>
             </q-header>
@@ -23,23 +23,20 @@
                     <q-avatar size="56px" class="q-mb-sm">
                         <img src="https://cdn.quasar.dev/img/boy-avatar.png">
                     </q-avatar>
-                    <div class="text-weight-bold">Razvan Stoenescu</div>
-                    <div>@rstoenescu</div>
+                    <div class="text-weight-bold">{{(UserGetter)? UserGetter.attributes.name : 'pp'}}</div>
+                    <!-- <div>@rstoenescu</div> -->
                 </div>
                 </q-img>
             </q-drawer>
 
             <q-page-container>
-                <q-page padding>
-                <p v-for="n in 15" :key="n">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-                </p>
-                </q-page>
+                <router-view />
             </q-page-container>
         </q-layout>
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 import EssentialLink from "./../components/EssentialLink.vue";
 export default {
 
@@ -50,6 +47,13 @@ export default {
             drawer : false,
             link: 'inbox'
         }
+    },
+
+    computed : {
+
+        ...mapGetters([
+            'UserGetter'
+        ])
     }
 }
 </script>

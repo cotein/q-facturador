@@ -32,10 +32,16 @@
 <script>
 const essentialLinks = [
     {
-        title : 'Title',
+        title : 'Login',
         caption : 'Caption',
         icon : 'icon',
         link : 'login',
+    },
+    {
+        title : 'Clientes',
+        caption : 'Caption',
+        icon : 'user',
+        link : 'customer',
     }
 ]
 export default {

@@ -1,24 +1,36 @@
 <template>
-    <q-page
-        class="q-ma-xl"
-    >
-        <div class="row"    >
-            <h1 >Listado de Clientes</h1>
-            
-        </div>
+    <q-page>
+        <transition appear name="fade">
+            <q-spinner v-if="www"
+                color="primary"
+                size="10rem"
+                class="flex justify-center"
+            />
+            <WrapperTable v-else/>
+        </transition>
+        
     </q-page>
 </template>
 <script>
 import {mapGetters} from 'vuex';
-import loadingMixin from "./../../mixins/loadingMixin";
+import loadingMixin from "../../../mixins/loadingMixin";
+import WrapperTable from "./../../../components/customer/list/WrapperTable.vue"
 export default {
 
     name: "CustomerList",
+
+    components : {WrapperTable},
 
     mixins : [loadingMixin],
     
     computed : {
         ...mapGetters(['CustomerListGetter'])
+    },
+
+    data(){
+        return{
+            www : true
+        }
     },
 
     async mounted(){
@@ -38,6 +50,12 @@ export default {
             
         }
 
+    },
+
+    mounted(){
+        setTimeout(() => {
+            this.www = false
+        }, 2500);
     }
  
 };

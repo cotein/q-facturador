@@ -1,12 +1,7 @@
 <template>
     <q-page>
         <transition appear name="fade">
-            <q-spinner v-if="www"
-                color="primary"
-                size="10rem"
-                class="flex justify-center"
-            />
-            <WrapperTable v-else/>
+            <WrapperTable />
         </transition>
         
     </q-page>

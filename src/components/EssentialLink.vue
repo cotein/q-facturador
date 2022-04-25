@@ -14,35 +14,104 @@
         <q-item-section>
             <q-item-label>title</q-item-label>
             <q-item-label caption>caption</q-item-label>
-        </q-item-section> -->
-        <q-list  >
+        </q-item-section> 
+        
+        
+        -->
+        <!-- <q-list  >
             <q-item  v-for="(link, index) in Links" :key="index" clickable v-ripple tag="a" @click="navigateTo(link.link)">
                     <q-item-section avatar>
-                        <q-icon name="send" />
+                        <q-icon :name="link.icon" />
                     </q-item-section>
 
-                    <q-item-section>
-                        {{link.title}}
-                    </q-item-section>
+                    <q-item-section>{{link.title}}</q-item-section>
             </q-item>
-        </q-list>
+        </q-list> -->
   <!-- </q-item> -->
+            <div class="q-pa-md" style="max-width: 350px">
+                <q-list bordered class="rounded-borders">
+                    <q-expansion-item  v-for="(link, index) in Links" :key="index"
+                        expand-separator
+                        icon="mail"
+                        :label="link.label"
+                        default-opened
+                    >
+                        <q-list  >
+                            <q-item class="q-ml-lg" v-for="(url) in link.links" :key="url.title" clickable v-ripple tag="a" @click="navigateTo(url.link)">
+                                    <q-item-section avatar>
+                                        <q-icon :name="url.icon" />
+                                    </q-item-section>
+
+                                    <q-item-section>{{url.title}}</q-item-section>
+                            </q-item>
+                        </q-list>
+
+                    </q-expansion-item>
+
+                    
+                </q-list>
+            </div>
 </template>
 
 <script>
 const essentialLinks = [
     {
+        label : 'Clientes',
+        links : 
+            [
+                {
+                    title : 'Clientes',
+                    caption : 'Caption',
+                    icon : 'group',
+                    link : 'customer',
+                },
+                {
+                    title : 'Nuevo Cliente',
+                    caption : 'Caption',
+                    icon : 'person',
+                    link : 'new-user',
+                }
+            ]
+        
+    },
+    {
+        label : 'provee',
+        links : 
+            [
+                {
+                    title : 'provee',
+                    caption : 'Caption',
+                    icon : 'group',
+                    link : 'customer',
+                },
+                {
+                    title : 'Nuevo Cliente',
+                    caption : 'Caption',
+                    icon : 'person',
+                    link : 'new-user',
+                }
+            ]
+        
+    },
+    
+    /* {
         title : 'Login',
         caption : 'Caption',
-        icon : 'icon',
+        icon : 'user',
         link : 'login',
     },
     {
         title : 'Clientes',
         caption : 'Caption',
-        icon : 'user',
+        icon : 'group',
         link : 'customer',
-    }
+    },
+    {
+        title : 'Nuevo Cliente',
+        caption : 'Caption',
+        icon : 'person',
+        link : 'new-user',
+    } */
 ]
 export default {
   name: 'EssentialLink',

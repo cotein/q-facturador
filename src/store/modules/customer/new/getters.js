@@ -1,1 +1,0 @@
-export const CustomerListGetter = (state) => state.customers;

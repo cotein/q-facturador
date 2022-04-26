@@ -8,8 +8,12 @@ export default {
         return Service.get(resource);
     },
 
-    create(payload){
-        return Service.post(resource, payload);
+    create(customer){
+        return Service.post(resource, customer);
+    },
+
+    delete(customer){
+        return Service.delete(resource + '/' + customer);
     },
 
     searchByName(query){

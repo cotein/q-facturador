@@ -8,6 +8,9 @@ const api = axios.create({
 
 api.interceptors.request.use(config => {
   config.headers["Authorization"] = `Bearer ${sessionStorage.getItem("user-token")}` 
+  config.headers["Access-Control-Allow-Origin"] = "*"
+  config.headers["Access-Control-Allow-Headers"] = 'POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin'
+  config.headers["Content-Type"] = 'application/json'
   return config;
 });
 

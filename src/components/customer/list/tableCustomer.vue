@@ -24,15 +24,7 @@
                     {{ props.row.attributes.number }}
                 </q-td>
                 <q-td key="actions" :props="props">
-                    <q-btn
-                        padding="xs"
-                        color="red"
-                        icon="person_off"
-                    >
-                        <q-tooltip>
-                            Eliminar cliente
-                        </q-tooltip>
-                    </q-btn>
+                    <buttonDeleteCustomer :customer_id="props.row.id" />
                 </q-td>
             </q-tr>
         </template>
@@ -92,6 +84,8 @@ const columns = [
         sortable: false
     },
 ]
+
+import buttonDeleteCustomer from './buttonDeleteCustomer.vue'
 export default {
 
     name : 'table',
@@ -106,6 +100,8 @@ export default {
             required : true
         }
     },
+
+    components : {buttonDeleteCustomer},
 
     computed : {
 

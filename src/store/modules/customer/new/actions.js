@@ -23,3 +23,15 @@ export const searchCustomerByName = async (_, query) => {
         throw error;
     }
 }
+
+export const deleteCustomer = async (_, customer) => {
+
+    try {
+        const response = await CustomerService.delete(customer);
+
+        return response.data;
+
+    } catch (error) {
+        throw error;
+    }
+}

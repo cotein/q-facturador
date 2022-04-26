@@ -66,6 +66,11 @@ export default {
         onReset(){
 
         }
+    },
+    
+    mounted(){
+        console.log(process.env.ENV_TYPE)
+
     }
 }
 </script>

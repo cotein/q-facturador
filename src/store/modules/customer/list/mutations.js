@@ -1,0 +1,1 @@
+export const SET_CUSTOMERS_LIST = (state, customers) => state.customers = customers;

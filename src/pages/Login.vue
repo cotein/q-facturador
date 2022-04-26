@@ -13,7 +13,7 @@
             <div class="col-lg-5 col-md-5 col-sm-5">
                 <span class="text-h5 flex justify-center q-ma-xl text-login" >INICIAR SESIÓN</span>
                 <q-form
-                    @submit="onSubmit"
+                    @submit="login"
                     @reset="onReset"
                     class="q-gutter-md q-pa-lg"
                 >
@@ -23,6 +23,7 @@
                         label="E-mail"
                         hint="Ingree su email"
                         lazy-rules
+                        :disable="isDisabledInput"
                         :rules="[ val => val && val.length > 0 || 'Campo requerido']"
                     />
 
@@ -32,12 +33,18 @@
                         v-model="password"
                         label="Password"
                         lazy-rules
+                        :disable="isDisabledInput"
                         :rules="[ val => val && val.length > 0 || 'Campo requerido']"
 
                     />
 
                     <div>
-                        <q-btn class="full-width" label="Aceptar" type="submit" color="primary"/>
+                        <q-btn 
+                            :loading="Loading"
+                            class="full-width" 
+                            label="Aceptar" 
+                            type="submit" 
+                            color="primary"/>
                     </div>
                 </q-form>
             </div>
@@ -46,32 +53,70 @@
 </template>
 
 <script>
+import inputMixin from "./../mixins/inputMixin";
+import loadingMixin from "./../mixins/loadingMixin";
+import UserHttpService from "./../services/UserHttpService";
 export default {
 
-    name: 'Login',
+    name: "Login",
 
-    data () {
+    mixins : [loadingMixin, inputMixin],
+
+    data() {
         return {
-            email: "randy.hamill@example.com", //casa : randy.hamill@example.com
+            email: "xernser@example.org", //casa : randy.hamill@example.com
             password: "password", //laburo : xernser@example.org
-        }
+        };
     },
 
-    methods : {
+    methods: {
 
-        onSubmit(){
+        async login() {
 
+            this.startLoading();
+
+            this.disabled_Input();
+
+            const { email, password } = this;
+
+            const login = await this.$store.dispatch('login', {email, password})
+            .catch((err) => {
+                this.$q.notify({
+                    type: 'negative',
+                    message: 'No se pudo conectar al servidor',
+                    icon: 'announcement'
+                });
+            })
+            .finally(() => {
+                this.enableInput();
+                this.stopLoading();
+            });
+
+            if (login) {
+                console.log('login')
+                console.log(login)
+                
+                console.log('login')
+                sessionStorage.setItem("user-token", login.data.access_token);
+                
+                setTimeout(async () => {
+                    const me = await UserHttpService.me();
+                    console.log('me')
+                    console.log(me)
+                    console.log('me')
+                    this.$store.dispatch('doLogin', me.data.data)
+
+                    this.$router.push("/customer");
+                }, 1000);
+                
+                
+            }
         },
 
         onReset(){
 
         }
     },
-    
-    mounted(){
-        console.log(process.env.ENV_TYPE)
-
-    }
 }
 </script>
 

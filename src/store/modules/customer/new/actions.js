@@ -35,3 +35,15 @@ export const deleteCustomer = async (_, customer) => {
         throw error;
     }
 }
+
+export const getCustomer = async (_, customer) => {
+
+    try {
+        const response = await CustomerService.show(customer);
+
+        return response.data;
+
+    } catch (error) {
+        throw error;
+    }
+}

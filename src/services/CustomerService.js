@@ -16,6 +16,10 @@ export default {
         return Service.delete(resource + '/' + customer);
     },
 
+    show(customer){
+        return Service.get(resource + '/' + customer);
+    },
+
     searchByName(query){
         return Service.get(resource, {
             params : {

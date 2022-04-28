@@ -12,18 +12,18 @@
             </q-tooltip>
         </q-btn>
         <q-dialog v-model="open_dialog" persistent>
-                <q-card>
-                    <q-card-section class="row items-center">
-                        <q-avatar icon="person" color="red" text-color="white" />
-                        <span class="q-ml-sm">Va a eliminar el cliente seleccionado, ¿Desea hacerlo?</span>
-                    </q-card-section>
+            <q-card>
+                <q-card-section class="row items-center">
+                    <q-avatar icon="person" color="red" text-color="white" />
+                    <span class="q-ml-sm">Va a eliminar el cliente seleccionado, ¿Desea continuar?</span>
+                </q-card-section>
 
-                    <q-card-actions align="right">
-                        <q-btn flat label="Cancelar" color="default" v-close-popup />
-                        <q-btn @click="deleteCustomer" flat label="Aceptar" color="primary" v-close-popup  />
-                    </q-card-actions>
-                </q-card>
-            </q-dialog>
+                <q-card-actions align="right">
+                    <q-btn flat label="Cancelar" color="default" v-close-popup />
+                    <q-btn @click="deleteCustomer" flat label="Aceptar" color="primary" v-close-popup  />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 

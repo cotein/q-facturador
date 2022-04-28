@@ -38,6 +38,12 @@ const essentialLinks = [
                     caption : 'Caption',
                     icon : 'person_add',
                     link : 'new-user',
+                },
+                {
+                    title : 'Generar comprobante de venta',
+                    caption : 'Caption',
+                    icon : 'feed',
+                    link : 'comprobantes/nuevo',
                 }
             ]
         
@@ -61,25 +67,6 @@ const essentialLinks = [
             ]
         
     },
-    
-    /* {
-        title : 'Login',
-        caption : 'Caption',
-        icon : 'user',
-        link : 'login',
-    },
-    {
-        title : 'Clientes',
-        caption : 'Caption',
-        icon : 'group',
-        link : 'customer',
-    },
-    {
-        title : 'Nuevo Cliente',
-        caption : 'Caption',
-        icon : 'person',
-        link : 'new-user',
-    } */
 ]
 export default {
   name: 'EssentialLink',

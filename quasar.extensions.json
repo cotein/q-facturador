@@ -2,5 +2,6 @@
   "@quasar/qenv": {
     "common_root_object": "n",
     "add_qenv_to_gitignore": false
-  }
+  },
+  "select-api": {}
 }

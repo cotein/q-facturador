@@ -53,8 +53,8 @@ module.exports = function (ctx) {
             APP_NAME:"Facturador DiMaIt",
             APP_API_SERVER:"http://localhost:8000/",
             APP_SERVER_CLIENT_ID:2,
-            //APP_SERVER_CLIENT_SECRET:'FeelUUMkuRAslrQgBO1dqdmYhCunUYos3MEWQwlL', //laburo
-            APP_SERVER_CLIENT_SECRET: 'owjiEPyovkftJq1ASNkm7Sl3K0PYGQgMlLAJCTQA', //casa
+            APP_SERVER_CLIENT_SECRET:'FeelUUMkuRAslrQgBO1dqdmYhCunUYos3MEWQwlL', //laburo
+            //APP_SERVER_CLIENT_SECRET: 'owjiEPyovkftJq1ASNkm7Sl3K0PYGQgMlLAJCTQA', //casa
             APP_GRANT_TYPE:'password',
             APP_AFIP_PTO_VTA:1,
         },

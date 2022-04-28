@@ -21,7 +21,7 @@
                         filled
                         v-model="email"
                         label="E-mail"
-                        hint="Ingree su email"
+                        hint="Ingrese su email"
                         lazy-rules
                         :disable="isDisabledInput"
                         :rules="[ val => val && val.length > 0 || 'Campo requerido']"
@@ -32,6 +32,7 @@
                         type="password"
                         v-model="password"
                         label="Password"
+                        hint="Ingrese su password"
                         lazy-rules
                         :disable="isDisabledInput"
                         :rules="[ val => val && val.length > 0 || 'Campo requerido']"
@@ -64,7 +65,7 @@ export default {
 
     data() {
         return {
-            email: "xernser@example.org", //casa : randy.hamill@example.com
+            email: "randy.hamill@example.com", //casa : randy.hamill@example.com
             password: "password", //laburo : xernser@example.org
         };
     },

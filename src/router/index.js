@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+import Plugin from 'quasar-ui-select-api/src/index.js'
+Vue.use(Plugin)
 
 import routes from './routes'
 
-Vue.use(VueRouter)
 
 /*
  * If not building with SSR mode, you can

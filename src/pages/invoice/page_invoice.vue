@@ -6,9 +6,10 @@
                 <q-card-section class="flex">
                     <SelectCustomer />
                     <div class="col"></div>
-                    
+                    <q-date class="col" v-model="date" />
                 </q-card-section>
             </q-card>
+            
     </q-page>
 </template>
 <script>
@@ -22,7 +23,7 @@ export default {
     
     data(){
         return {
-            model : null
+            date : null
         }
     }
  

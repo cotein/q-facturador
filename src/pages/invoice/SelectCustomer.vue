@@ -3,11 +3,10 @@
         class="col"
         v-model="model"
         use-input
-        option-label="label"
-        option-value="id"
+        input-debounce="500"
         label="Cliente"
-        :options="options"
-        @filter="filterFn"
+        :options="Options"
+        @input-value="searchData"
     />
 </template>
 
@@ -25,11 +24,11 @@ export default {
 
     methods : {
 
-        async filterFn(search){
+        async searchData(search){
             const response = await this.$store.dispatch('searchCustomerByName', search)
 
             console.log(response.data)
-            const www = response.data.map((el)=>{
+            this.options = response.data.map((el)=>{
                 console.log({
                     id : el.id,
                     label : el.name,
@@ -39,11 +38,13 @@ export default {
                     label : el.name,
                 }
             });
+        }
+    },
 
-            console.log('www')
-            console.log(www)
-            this.options = www
-            console.log('www')
+    computed : {
+
+        Options(){
+            return this.options;
         }
     }
 }

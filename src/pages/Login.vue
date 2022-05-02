@@ -65,8 +65,8 @@ export default {
 
     data() {
         return {
-            //email: "xernser@example.org", //laburo
-            email: "randy.hamill@example.com", //casa : 
+            email: "xernser@example.org", //laburo
+            //email: "randy.hamill@example.com", //casa : 
             password: "password", 
         };
     },

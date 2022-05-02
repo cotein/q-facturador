@@ -4,10 +4,12 @@
         v-model="model"
         use-input
         fill-input
-        input-debounce="500"
+        hide-selected
+        input-debounce="10"
         label="Cliente"
         :options="Options"
-        @input-value="searchData"
+        @filter="searchData"
+        @input-value="setModel"
     />
 </template>
 
@@ -24,25 +26,27 @@ export default {
     },
 
     methods : {
-
+        
         async searchData(search){
             console.log(search)
             const response = await this.$store.dispatch('searchCustomerByName', search)
 
             console.log(response.data)
-            this.options = response.data.map((el)=>{
+            this.options = response.data.filter((el)=>{
                 console.log({
-                    id : el.id,
-                    label : el.name,
+                    el
                 })
-                return {
+                el.name.includes(search)
+                let pp = {
                     id : el.id,
                     label : el.name,
                 }
+
+                this.setModel(pp)
             });
         },
 
-        async setmodel(s){
+        setModel(s){
             this.model = s
         }
     },

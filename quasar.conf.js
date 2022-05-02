@@ -53,8 +53,8 @@ module.exports = function (ctx) {
             APP_NAME:"Facturador DiMaIt",
             APP_API_SERVER:"http://localhost:8000/",
             APP_SERVER_CLIENT_ID:2,
-            APP_SERVER_CLIENT_SECRET:'FeelUUMkuRAslrQgBO1dqdmYhCunUYos3MEWQwlL', //laburo
-            //APP_SERVER_CLIENT_SECRET: 'owjiEPyovkftJq1ASNkm7Sl3K0PYGQgMlLAJCTQA', //casa
+            //APP_SERVER_CLIENT_SECRET:'FeelUUMkuRAslrQgBO1dqdmYhCunUYos3MEWQwlL', //laburo
+            APP_SERVER_CLIENT_SECRET: 'owjiEPyovkftJq1ASNkm7Sl3K0PYGQgMlLAJCTQA', //casa
             APP_GRANT_TYPE:'password',
             APP_AFIP_PTO_VTA:1,
         },
@@ -94,7 +94,7 @@ module.exports = function (ctx) {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
       config: {},
-
+      cssAddon: false,
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
       // * 'all'  - Manually specify what to import

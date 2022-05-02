@@ -3,19 +3,19 @@
         class="q-ma-xl"
     >
         <div class="row">
-            <div class="col-lg-7 col-md-7 col-sm-7">
+            <div class="col-lg-7 col-md-7">
                 <q-img
                     src="~/assets/img-login.svg"
                     spinner-color="primary"
                     spinner-size="82px"
                 />
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-5">
-                <span class="text-h5 flex justify-center q-ma-xl text-login" >INICIAR SESIÓN</span>
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <span class="text-h5 flex justify-center q-ma-xl-xl q-ma-xs-xs text-login" >INICIAR SESIÓN</span>
                 <q-form
                     @submit="login"
                     @reset="onReset"
-                    class="q-gutter-md q-pa-lg"
+                    class="q-gutter-md q-pa-lg-lg q-pa-md-xl q-pa-xs-xs"
                 >
                     <q-input
                         filled
@@ -65,8 +65,8 @@ export default {
 
     data() {
         return {
-            email: "xernser@example.org", //laburo
-            //email: "randy.hamill@example.com", //casa : 
+            //email: "xernser@example.org", //laburo
+            email: "randy.hamill@example.com", //casa : 
             password: "password", 
         };
     },

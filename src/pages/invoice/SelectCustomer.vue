@@ -3,6 +3,7 @@
         class="col"
         v-model="model"
         use-input
+        fill-input
         input-debounce="500"
         label="Cliente"
         :options="Options"
@@ -25,6 +26,7 @@ export default {
     methods : {
 
         async searchData(search){
+            console.log(search)
             const response = await this.$store.dispatch('searchCustomerByName', search)
 
             console.log(response.data)
@@ -38,6 +40,10 @@ export default {
                     label : el.name,
                 }
             });
+        },
+
+        async setmodel(s){
+            this.model = s
         }
     },
 

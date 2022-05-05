@@ -15,7 +15,7 @@
                                                 <q-btn v-close-popup label="Cerrar" color="primary" flat />
                                             </div>
                                         </q-date>
-                                    </q-popup-proxy>
+                                    </q-popup-proxy>ta  
                                 </q-icon>
                             </template>
                         </q-input>

@@ -3,9 +3,10 @@
         class="q-ma-lg"
     >
             <q-card class="col-12">
-                <q-card-section class="flex">
-                    <SelectCustomer />
-                    <div class="col"></div>
+                <q-card-section class="">
+                    <div class="flex">
+                        <SelectCustomer />
+                        <div class="col"></div>
                         <q-input v-model="date" mask="date" :rules="['date']">
                             <template v-slot:append>
                                 <q-icon name="event" class="cursor-pointer">
@@ -15,11 +16,14 @@
                                                 <q-btn v-close-popup label="Cerrar" color="primary" flat />
                                             </div>
                                         </q-date>
-                                    </q-popup-proxy>ta  
+                                    </q-popup-proxy>
                                 </q-icon>
                             </template>
                         </q-input>
+                    </div>
+                    <q-editor v-model="editor" min-height="15rem" />
                 </q-card-section>
+
             </q-card>
             
     </q-page>
@@ -35,7 +39,8 @@ export default {
     
     data(){
         return {
-            date : null
+            date : new Date,
+            editor : ''
         }
     }
  

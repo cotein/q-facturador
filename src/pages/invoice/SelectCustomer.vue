@@ -6,7 +6,7 @@
         fill-input
         emit-value
         hide-selected
-        input-debounce="10"
+        input-debounce="0"
         label="Cliente"
         :options="Options"
         @filter="searchData"
@@ -27,27 +27,24 @@ export default {
 
     methods : {
         
-        async searchData(search){
+        async searchData(search, update){
             console.log(search)
             const response = await this.$store.dispatch('searchCustomerByName', search)
 
             console.log(response.data)
-            this.options = response.data;
-            /* this.options = response.data.filter((el)=>{
-                console.log(el)
-                el.name.includes(search)
-                let customer = {
-                    id : el.id,
-                    label : el.name,
-                }
+            //
+            //this.options = response.data;
+            update(()=> {
 
-                this.setModel(customer)
-            }); */
+                this.options = response.data.map((el)=>{
+                    return {
+                        id : el.id,
+                        label : el.name,
+                    }
+                }); 
+            })
         },
 
-       /*  setModel(s){
-            this.model = s
-        } */
     },
 
     computed : {
@@ -58,7 +55,8 @@ export default {
             console.log('this.options dentro de computed')
             return this.options;
         }
-    }
+    },
+
 }
 </script>
 

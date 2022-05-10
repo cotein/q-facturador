@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import loading_mixin from './../../../mixins/loadingMixin';
 export default {
 
     name : 'buttonDeleteCustomer',
@@ -36,8 +35,6 @@ export default {
     props : {
         customer_id : {require : false}
     },
-
-    mixins : [loading_mixin],
 
     data(){
         return {

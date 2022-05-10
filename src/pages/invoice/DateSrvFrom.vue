@@ -1,9 +1,11 @@
 <script>
-import VueDatePickerCustom from "./../../components/globals/VueDatePickerCustom"
+import {mapGetters} from 'vuex';
+import QDateGlobal from "../../components/global/q-date-global.vue";
 export default {
+
     name : "DateSrvFrom",
 
-    extends : VueDatePickerCustom,
+    extends : QDateGlobal,
 
     data(){
         return {
@@ -15,12 +17,16 @@ export default {
 
         date(n){
             this.$store.dispatch('invoiceSetDateSrvFrom', n);
-        }
+        },
+
     },
 
-    mounted(){
-        this.$store.dispatch('invoiceSetDateSrvFrom', `${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`);
-    }
+    computed : {
+
+        ...mapGetters(['']),
+    },
+
+    
 
 }
 </script>

@@ -134,8 +134,8 @@
 <script>
 
 import DateInvoice from "./DateInvoice.vue"
-import DateSrvFrom from "./DateSrvFrom.vue"
-import DateSrvTo from "./DateSrvTo.vue"
+import DateSrvFrom from "./DateSrvFrom_.vue"
+import DateSrvTo from "./DateSrvFrom.vue"
 import DateSrvVtoPago from "./DateSrvVtoPago.vue"
 import ClassicE from './ClassicE.vue';
 import MultiselectCustomer from "./MultiselectCustomer.vue"

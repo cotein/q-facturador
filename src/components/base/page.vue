@@ -2,10 +2,10 @@
     <q-page
         class="q-ma-xl"
     >
-        <div class="row"    >
+        <!-- <div class="row"    >
             <h1 ></h1>
             
-        </div>
+        </div> -->
     </q-page>
 </template>
 <script>

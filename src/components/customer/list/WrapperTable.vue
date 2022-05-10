@@ -5,14 +5,11 @@
 <script>
 import {mapGetters} from 'vuex';
 import tableCustomer from "./tableCustomer.vue";
-import loading_mixin from "./../../../mixins/loadingMixin"
 export default {
 
     name : 'WrapperTable',
 
     components : {tableCustomer},
-
-    mixins : [loading_mixin],
 
     computed : {
 

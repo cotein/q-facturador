@@ -7,19 +7,7 @@
                     <div class="flex">
                         <SelectCustomer />
                         <div class="col"></div>
-                        <q-input v-model="date" mask="date" :rules="['date']">
-                            <template v-slot:append>
-                                <q-icon name="event" class="cursor-pointer">
-                                    <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
-                                        <q-date v-model="date" mask="DD-MM-YYYY">
-                                            <div class="row items-center justify-end">
-                                                <q-btn v-close-popup label="Cerrar" color="primary" flat />
-                                            </div>
-                                        </q-date>
-                                    </q-popup-proxy>
-                                </q-icon>
-                            </template>
-                        </q-input>
+                        <DateSrvFrom />
                     </div>
                     <q-editor v-model="editor" min-height="15rem" />
                 </q-card-section>
@@ -30,12 +18,13 @@
 </template>
 <script>
 import {mapGetters} from 'vuex';
-import SelectCustomer from './SelectCustomer.vue'
+import SelectCustomer from './SelectCustomer.vue';
+import DateSrvFrom from "./DateSrvFrom.vue"
 export default {
 
     name: "page_invoice",
 
-    components : {SelectCustomer},
+    components : {SelectCustomer, DateSrvFrom},
     
     data(){
         return {

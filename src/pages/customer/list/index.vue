@@ -3,12 +3,10 @@
         <transition appear name="fade">
             <WrapperTable />
         </transition>
-        
     </q-page>
 </template>
 <script>
 import {mapGetters} from 'vuex';
-import loadingMixin from "../../../mixins/loadingMixin";
 import WrapperTable from "./../../../components/customer/list/WrapperTable.vue"
 export default {
 
@@ -16,16 +14,8 @@ export default {
 
     components : {WrapperTable},
 
-    mixins : [loadingMixin],
-    
     computed : {
         ...mapGetters(['CustomerListGetter'])
-    },
-
-    data(){
-        return{
-            www : true
-        }
     },
 
     async mounted(){
@@ -46,12 +36,5 @@ export default {
         }
 
     },
-
-    mounted(){
-        setTimeout(() => {
-            this.www = false
-        }, 2500);
-    }
- 
 };
 </script>

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
+import loading_mixin from "./../mixins/loadingMixin";
+Vue.mixin(loading_mixin);
+
 import auth from "./modules/auth" ;
 import settings from "./modules/settings";
 import customer from "./modules/customer";

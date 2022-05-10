@@ -55,13 +55,12 @@
 
 <script>
 import inputMixin from "./../mixins/inputMixin";
-import loadingMixin from "./../mixins/loadingMixin";
 import UserHttpService from "./../services/UserHttpService";
 export default {
 
     name: "Login",
 
-    mixins : [loadingMixin, inputMixin],
+    mixins : [inputMixin],
 
     data() {
         return {
@@ -116,7 +115,8 @@ export default {
         },
 
         onReset(){
-
+            this.password = '';
+            this.email = '';
         }
     },
 }

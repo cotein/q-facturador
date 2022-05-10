@@ -7,7 +7,7 @@
         class="q-mt-lg"
         no-data-label="Sin clientes para mostrar"
         loading-label="Búscando datos"
-        :loading="loading"
+        :loading="Loading"
     >
         <template v-slot:body="props">
             <q-tr :props="props">
@@ -95,10 +95,6 @@ export default {
             type : Array,
             required : true
         },
-        loading : {
-            type : Boolean,
-            required : true
-        }
     },
 
     components : {buttonDeleteCustomer},

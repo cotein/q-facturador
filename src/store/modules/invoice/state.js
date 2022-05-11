@@ -5,7 +5,7 @@ const state = {
     description : null,
     pto_vta : null,
     cbte_nro : null,
-    concepto : 1,
+    concepto : {id : 2, label : 'Servicios'},
     term_of_sale : null,
     srv : {
         FchServDesde : null,

@@ -1,21 +1,33 @@
 <template>
-    <q-input filled v-model="date" mask="date" :rules="['date']">
-      <template v-slot:append>
-        <q-icon name="event" class="cursor-pointer">
-          <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
-            <q-date v-model="date" mask="DD/MM/YYYY">
-              <div class="row items-center justify-end">
-                <q-btn v-close-popup label="Close" color="primary" flat />
-              </div>
-            </q-date>
-          </q-popup-proxy>
-        </q-icon>
-      </template>
+    <q-input v-model="date" :label="label" :dense="true">
+        <template v-slot:append>
+            <q-icon name="event" mask="##/##/####" class="cursor-pointer">
+                <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
+                    <q-date 
+                        v-model="date" 
+                        mask="DD/MM/YYYY"
+                        :locale="myLocale"
+                        minimal
+                        >
+                        <div class="row items-center justify-end">
+                            <q-btn v-close-popup label="Cerrar" color="primary" flat />
+                        </div>
+                    </q-date>
+                </q-popup-proxy>
+            </q-icon>
+        </template>
     </q-input>
 </template>
 
 <script>
 export default {
+
+    props : {
+        label : {
+            required : true,
+            type : String
+        }
+    },
 
     data(){
         return {
@@ -28,11 +40,10 @@ export default {
                 format24h: true,
                 pluralDay: 'días'
             },
-            date : null
+            //date : null
         }
     },
 
-    mounted(){
-    }
+    
 }
 </script>

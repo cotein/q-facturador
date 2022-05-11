@@ -1,30 +1,35 @@
 <script>
-import VueDatePickerCustom from "./../../components/globals/VueDatePickerCustom"
+import {mapGetters} from 'vuex';
+import UtilsDate from "./../../utils/date/UtilsDate";
+import QDateGlobal from "../../components/global/q-date-global.vue";
 export default {
+
     name : "DateInvoice",
 
-    extends : VueDatePickerCustom,
+    extends : QDateGlobal,
 
     data(){
         return {
-            date : new Date
         }
     },
     
-    watch:{
+    computed : {
 
-        date(n){
-            this.$store.dispatch('invoiceSetDateInvoice', n);
+        ...mapGetters(['InvoiceGetDateInvoice']),
+
+        date : {
+            get(){
+                return this.InvoiceGetDateInvoice;
+            },
+            set(value){
+                this.$store.dispatch('invoiceSetDateInvoice', value);
+            }
         }
     },
 
-    mounted(){
-        this.$store.dispatch('invoiceSetDateInvoice', `${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`);
+    beforeMount(){
+        this.$store.dispatch('invoiceSetDateInvoice', UtilsDate.toDay());
     }
 
 }
 </script>
-
-<style>
-
-</style>

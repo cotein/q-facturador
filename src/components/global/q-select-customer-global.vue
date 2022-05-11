@@ -2,9 +2,11 @@
     <q-select 
         class="col"
         v-model="customer"
+        outlined 
         use-input
         fill-input
         emit-value
+        :dense="true"
         hide-selected
         input-debounce="0"
         label="Cliente"
@@ -35,6 +37,7 @@ export default {
                         return {
                             id : el.id,
                             label : el.name,
+                            //number : el.number,
                         }
                     }); 
                 });

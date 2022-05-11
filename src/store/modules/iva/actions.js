@@ -1,4 +1,4 @@
-import IvaService from "../../../../services/IvaService";
+import IvaService from "../../../services/IvaService";
 
 export const multiselectIvaSetOptions = ({commit}, options) => commit('MULTISELECT_IVA_SET_OPTIONS', options);
 

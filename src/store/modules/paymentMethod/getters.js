@@ -1,0 +1,1 @@
+export const PaymentMethodsGetter = (state) => state.payment_methods;

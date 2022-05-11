@@ -1,6 +1,5 @@
 const state = {
-    options : [],
-    value : null
+    payment_methods : [],
 } 
 
 export default state;

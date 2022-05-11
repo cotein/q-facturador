@@ -1,0 +1,1 @@
+export const SET_PAYMENT_METHODS = (state, payment_methods) => state.payment_methods = payment_methods;

@@ -8,10 +8,10 @@ export default {
         return Service.get(resource);
     },
 
-    create(payload){
-        return Service.post(resource, payload);
+    create(term){
+        return Service.post(resource, term);
     },
-
+    
     searchByName(query){
         return Service.get(resource, {
             params : {

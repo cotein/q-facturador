@@ -5,7 +5,7 @@
             <q-card class="col-12">
                 <q-card-section>
                     <div class="row justify-between">
-                        <SelectCustomer class="col-md-8"/>
+                        <SelectCustomer class="col-md-8" :display_button_add_customer="true"/>
                         <DateInvoice :label="'Fecha Factura'" class="col-md-3"/>
                     </div>
 

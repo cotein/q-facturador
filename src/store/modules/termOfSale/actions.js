@@ -12,6 +12,18 @@ export const getTermOfSale = async (_,) => {
     }
 }
 
+export const createTermOfSale = async (_, payload) => {
+
+    try {
+        const response = await TermOfSale.create(payload)
+
+        return response.data;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const searchTermOfSaleByName = async (_, query) => {
 
     try {

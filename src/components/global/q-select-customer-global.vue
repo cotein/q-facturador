@@ -16,24 +16,54 @@
         <template v-slot:after v-if="display_button_add_customer">
             <q-btn round dense flat icon="person_add" @click="open_dialog = true">
                 <q-tooltip class="bg-amber text-black shadow-4" :offset="[10, 10]">
-                    Ingresar nuevo Cliente
+                    Ingresar nuevo Cliente, buscar en AFIP
                 </q-tooltip>
             </q-btn>
         </template>
+
+        <q-dialog v-model="open_dialog">
+            <q-card style="width: 700px; max-width: 80vw;">
+                <q-toolbar>
+                    <q-toolbar-title><span class="text-subtitle1">Buscar Sujeto en AFIP por DNI - CUIL - CUIT </span></q-toolbar-title>
+                        <q-btn flat round dense icon="close" v-close-popup />
+                </q-toolbar>
+
+                <q-card-section>
+                    <search-people />
+                </q-card-section>
+
+                <q-separator />
+                
+                <q-card-section v-if="PersonIsArrayGetter">
+                    <q-select outlined v-model="search_number" :options="Options" label="Concepto" :dense="true"/>
+                </q-card-section>
+
+            </q-card>
+        </q-dialog>
     </q-select>
 </template>
 <script>
-
+import {mapGetters} from 'vuex';
+import searchPeople from "./../../components/afip/SearchPerson.vue";
 export default {
     
+    name : 'QSelectCustomerGlobal',
+
     props : {
         display_button_add_customer : {
             required : true,
             type : Boolean
         }
     },
-    name : 'QSelectCustomerGlobal',
     
+    components : {searchPeople},
+
+    data(){
+        return{
+            open_dialog : false
+        }
+    },
+
     methods : {
         
         async searchData(search, update){
@@ -59,6 +89,29 @@ export default {
         },
 
     },
+
+    computed : {
+
+        ...mapGetters([
+            'PersonIsArrayGetter',
+            'SearchNumberGetter',
+            'PersonGetter'
+        ]),
+
+        search_number : {
+            get(){
+                return this.SearchNumberGetter;
+            },
+            set(search_number){
+                this.$store.dispatch('setSearchNumberAction', search_number)
+            }
+        },
+
+        Options(){
+
+            return this.PersonGetter.idPersonaListReturn.idPersona;
+        }
+    }
 
 }
 </script>

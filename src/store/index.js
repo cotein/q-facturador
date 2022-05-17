@@ -12,14 +12,16 @@ import customer_new from "./modules/customer/new";
 import customer_list from "./modules/customer/list";
 import invoice from "./modules/invoice";
 import afip_wsfev1 from "./modules/afip/wsFeV1";
-import term_of_sale from "./modules/termOfSale"
-import payment_methods from './modules/paymentMethod'
+import afip_wsPuc from "./modules/afip/wsPuc";
+import term_of_sale from "./modules/termOfSale";
+import payment_methods from './modules/paymentMethod';
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       settings,
       afip_wsfev1,
+      afip_wsPuc,
       auth,
       customer,
       customer_list,

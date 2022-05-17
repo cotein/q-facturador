@@ -11,7 +11,7 @@
             :option-label="opt => Object(opt) === opt && 'name' in opt ? opt.name : null"
         >
             <template v-slot:append>
-            <q-icon v-if="saleCondition !== ''" name="close" @click.stop="saleCondition = ''" class="cursor-pointer" />
+                <q-icon v-if="saleCondition !== ''" name="close" @click.stop="saleCondition = ''" class="cursor-pointer" />
             </template>
 
             <template v-slot:after>
@@ -63,6 +63,7 @@ export default {
         async saveCondition(){
 
             this.startLoading();
+            
             const saleCondition = await this.$store.dispatch('createTermOfSale', {term : this.saleCondition})
                 .catch((err) => console.log(err.response.data))
                 .finally(()=> this.stopLoading())

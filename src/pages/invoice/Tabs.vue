@@ -19,7 +19,7 @@
         <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="Principal">
                 <div class="text-h6">Principal</div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                
             </q-tab-panel>
 
             <q-tab-panel name="Remitos">
@@ -37,6 +37,8 @@
 
 <script>
 import TabEditor from "./TabEditor.vue";
+
+
 export default {
 
     components : {TabEditor},

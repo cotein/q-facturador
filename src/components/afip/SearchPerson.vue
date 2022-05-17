@@ -1,104 +1,89 @@
 <template>
-    <div class="row">
-        <div class="col-md-12">
-            <form class="form form-inline">
-                <label >BUSCAR EN AFIP </label>
-                <div class="form-group">
-                    <div class="input-with-icon">
-                        <vue-autonumeric
-                            :disabled="spinner"
-                            placeholder="CUIT"
-                            class="form-control text-right"
-                            :options="options"
-                            v-model="number"
-                        ></vue-autonumeric>
-                    </div>
-                </div>
-                <button 
-                    v-tooltip="'Buscar contribuyente en Afip'"
-                    @click="getPersonFromAfip"
-                    :disabled="spinner"
-                    class="btn btn-primary btn-icon sq-32" 
-                    :class="{'btn btn-primary spinner spinner-inverse spinner-sm' : spinner}"
-                    type="button">
-                    <span class="icon icon-search"></span>
-                </button>
-                <fade-transition>
-                    <select class="form-control" v-model="personaSelected" v-if="IsPersonArray" :disabled="spinner">
-                        <option >Selecciona contribuyente</option>
-                        <option v-for="(persona, index) in this.person.idPersonaListReturn.idPersona" v-bind:value="persona" :key="index">{{ persona }}</option>
-                    </select>
-                </fade-transition>
-            </form>
-        </div>
-    </div>
+    <q-input 
+        bottom-slots 
+        v-model="search_number" 
+        label="DNI - CUIL - CUIT" 
+        counter 
+        maxlength="11" 
+        :dense="dense"
+        :rules="[val => isNumeric(val) || 'Sólo se aceptan números', val => length(val) || 'El número debe contener al menos 6 caracteres']"
+    >
+        <template v-slot:append>
+            <q-btn round dense flat icon="search" 
+                :loading="Loading"
+                @click="searchPersonAtAFIP"
+                :disabled="! isNumeric(search_number)"
+            >
+                <q-tooltip class="bg-amber text-black shadow-4" :offset="[10, 10]">
+                    Buscar
+                </q-tooltip>
+            </q-btn>
+        </template>
+    </q-input>
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect';
 import {mapGetters} from 'vuex';
-import VueAutonumeric from '../../../../../../../../node_modules/vue-autonumeric/src/components/VueAutonumeric';
 export default {
-    components : {
-        Multiselect, VueAutonumeric
-    },
+
+    name : 'SearchPerson',
+
     data() {
         return {
-            spinner : false,
-            options : {
-                decimalPlaces : 0,
-                digitGroupSeparator: '',
-                decimalCharacter: ',',
-                decimalCharacterAlternative: '.',
-                currencySymbolPlacement: 'p',
-                roundingMethod: 'U',
-                minimumValue: '0',
-                modifyValueOnWheel  : false,
-                showOnlyNumbersOnFocus : true,
-            },
-            hasError : false,
-            errorMsg : null,
             person : null,
             personIsArray : false,
             personaSelected : null
         }
     },
+
     methods : {
+
+        isNumeric(value) {
+            return /^\d+$/.test(value);
+        },
+
+        length(value){
+            if (value != null) {
+                if (value.toString().length < 6) {
+                    return false;
+                }
+                return true;
+            }
+        },
 
         thisObjectHasThisProperty(object, property){
             return (object.hasOwnProperty(property)) ? true : false;
         },
 
-        async getPersonFromAfip()
+        async searchPersonAtAFIP()
         {
-            this.$store.dispatch('newCustomerSetInitialStatus');
-            this.hasError = false;
-            this.errorMsg = null;
-            this.spinner = true;
-            this.personIsArray = false;
-            const payload = {
-                    token : this.User.token,
-                    cuit : this.NewCustomerGetNumber
-                }
+            this.$store.dispatch('setPersonIsArrayAction', false);
 
-            const person = await this.getPerson(payload);
+            const person = await this.searchPerson(this.SearchNumberGetter);
             
             if (person) {
                 this.checkResponse(person);
-                return person;
+                this.$store.dispatch('setPersonAction', person.data);
             }
         },
 
-        async getPerson(payload){
-            const person = await this.$store.dispatch('getPersonFromAfip', payload)
+        async searchPerson(number){
+
+            this.startLoading();
+
+            const person = await this.$store.dispatch('searchPersonAtAFIP', number)
                 .catch((err)=>{
-                    this.error_message(err.response.data.message, 'AFIP' , 4000);
-                }).finally(()=>this.spinner = false);
-            
-            console.log('person')
-            console.log(person)
-            console.log('person')
-            return person;
+                    this.$q.notify({
+                        type: 'negative',
+                        message: err.response.data,
+                        icon: 'info'
+                    });
+                })
+                .finally(()=>this.stopLoading());
+            if (person) {
+                
+                return person;
+            }    
         },
 
         checkResponse(person)
@@ -106,10 +91,11 @@ export default {
             if (this.thisObjectHasThisProperty(person, 'idPersonaListReturn')) {
                 if (this.thisObjectHasThisProperty(person.idPersonaListReturn, 'idPersona')) {
                     this.personIsArray = Array.isArray(person.idPersonaListReturn.idPersona);
+                    this.$store.dispatch('setPersonIsArrayAction', true);
                 }
             }
 
-            if (this.thisObjectHasThisProperty(person, 'idPersonaListReturn')) {
+            /* if (this.thisObjectHasThisProperty(person, 'idPersonaListReturn')) {
 
                 if(this.thisObjectHasThisProperty(person.idPersonaListReturn, 'idPersona'))
                 { // ingreso dni, devuelve cuil
@@ -119,29 +105,29 @@ export default {
                         
                     }else{
                         this.person = person;
-                        this.$store.dispatch('newCustomerSetNumber', parseInt(person.idPersonaListReturn.idPersona))
+                        //this.$store.dispatch('newCustomerSetNumber', parseInt(person.idPersonaListReturn.idPersona))
                     }
                     
                 }
                 
-            }
+            } */
 
             if (this.thisObjectHasThisProperty(person, 'personaReturn')) {
                 
-                this.personIsArray = false;
+                this.$store.dispatch('setPersonIsArrayAction', false);
                 
                 if (this.thisObjectHasThisProperty(person.personaReturn, 'datosGenerales')) {
                     
                      const purchase_document = {"id":25,"afip_code":"80","name":"CUIT"};
-                    this.$store.dispatch('newCustomerSetPurchaseDocument', purchase_document);
+                    //this.$store.dispatch('newCustomerSetPurchaseDocument', purchase_document);
 
                     if (this.thisObjectHasThisProperty(person.personaReturn.datosGenerales, 'razonSocial')) {
                         const name = `${person.personaReturn.datosGenerales.razonSocial}`
-                        this.$store.dispatch('newCustomerSetName', name);
+                        //this.$store.dispatch('newCustomerSetName', name);
                     }else{
                         /** cuando es monotributista o responsable inscripto pesona fisica*/
                         const name = `${person.personaReturn.datosGenerales.apellido} ${person.personaReturn.datosGenerales.nombre}`
-                        this.$store.dispatch('newCustomerSetName', name);
+                        //this.$store.dispatch('newCustomerSetName', name);
                     }
 
                     if (this.thisObjectHasThisProperty(person.personaReturn.datosGenerales, 'domicilioFiscal')){
@@ -150,31 +136,31 @@ export default {
 
                         const index = this.Provinces.findIndex((provincia) => provincia.afip_code == id_provincia)
 
-                        this.$store.dispatch('newCustomerAddressSetState', this.Provinces[index]);
+                        //this.$store.dispatch('newCustomerAddressSetState', this.Provinces[index]);
                         
 
                         if (parseInt(id_provincia) == 0) {
-                            this.$store.dispatch('newCustomerAddressSetCity', 'CIUDAD AUTONOMA BUENOS AIRES');
+                            //this.$store.dispatch('newCustomerAddressSetCity', 'CIUDAD AUTONOMA BUENOS AIRES');
                         }else{
                             const city = person.personaReturn.datosGenerales.domicilioFiscal.localidad;
-                            this.$store.dispatch('newCustomerAddressSetCity', city);
+                            //this.$store.dispatch('newCustomerAddressSetCity', city);
                         }
                         
 
                         const address = person.personaReturn.datosGenerales.domicilioFiscal.direccion;
-                        this.$store.dispatch('newCustomerAddressSetAddress', address);
+                        //this.$store.dispatch('newCustomerAddressSetAddress', address);
 
                         const cp = person.personaReturn.datosGenerales.domicilioFiscal.codPostal;
-                        this.$store.dispatch('newCustomerAddressSetCp', cp);
+                        //this.$store.dispatch('newCustomerAddressSetCp', cp);
 
                     }
 
                     if (this.thisObjectHasThisProperty(person.personaReturn, 'datosMonotributo')){
                         const inscription = {"id":6,"name":"Responsable Monotributo","short":"M"};
-                        this.$store.dispatch('newCustomerSetInscription', inscription);
+                        //this.$store.dispatch('newCustomerSetInscription', inscription);
                     }else{
                         const inscription = {"id":1,"name":"IVA Responsable Inscripto","short":"IRI"};
-                        this.$store.dispatch('newCustomerSetInscription', inscription);
+                        //this.$store.dispatch('newCustomerSetInscription', inscription);
                     }
                 }
 
@@ -210,22 +196,22 @@ export default {
 
                     if (errors == 'La clave ingresada no es una CUIT') {
                         
-                        this.$store.dispatch('newCustomerSetNumber', parseInt(person.personaReturn.errorConstancia.idPersona));
+                        //this.$store.dispatch('newCustomerSetNumber', parseInt(person.personaReturn.errorConstancia.idPersona));
                         
                         const name = `${person.personaReturn.errorConstancia.apellido} ${person.personaReturn.errorConstancia.nombre}`
-                        this.$store.dispatch('newCustomerSetName', name);
+                        //this.$store.dispatch('newCustomerSetName', name);
 
                         const purchase_document = {"id":26,"afip_code":"86","name":"CUIL"};
-                        this.$store.dispatch('newCustomerSetPurchaseDocument', purchase_document);
+                        //this.$store.dispatch('newCustomerSetPurchaseDocument', purchase_document);
 
                         const inscription = {"id":5,"name":"Consumidor Final","short":"CF"};
-                        this.$store.dispatch('newCustomerSetInscription', inscription);
+                        //this.$store.dispatch('newCustomerSetInscription', inscription);
                     }
 
                 }
             }
 
-            this.$store.dispatch('newCustomerSetAfipData', person);
+            //this.$store.dispatch('newCustomerSetAfipData', person);
         },
     }, 
 
@@ -239,7 +225,7 @@ export default {
                 token : this.User.token,
                 cuit : n
             }
-            const person = await this.getPerson(payload);
+            const person = await this.searchPerson(payload);
 
             if (person) {
                 this.checkResponse(person);
@@ -249,17 +235,17 @@ export default {
 
     computed : {
 
-        ...mapGetters(['NewCustomerGetNumber', 'Provinces']),
+        ...mapGetters(['SearchNumberGetter']),
 
-        number : {
+        search_number : {
             get(){
-                return this.NewCustomerGetNumber;
+                return this.SearchNumberGetter;
             },
-            set(number){
-                this.$store.dispatch('newCustomerSetNumber', number)
+            set(search_number){
+                this.$store.dispatch('setSearchNumberAction', search_number)
             }
         },
-
+ 
         IsPersonArray(){
 
             return this.personIsArray;

@@ -11,10 +11,20 @@
 
                     <div class="row q-mt-lg">
                         <QSelectConceptInvoice class="col-md-4"/>
-                            <div class="flex  justify-between" v-if="InvoiceGetConcepto.label.includes('Servicios') ">
-                                <DateInvoice :label="'Servicio desde'"  class="q-ml-lg"/>
-                                <DateInvoice :label="'Servicio hasta'"  class="q-ml-lg"/>
-                            </div>
+                            <!-- <transition
+                                :duration="1000"
+                                appear
+                                enter-active-class="animated fadeIn"
+                                leave-active-class="animated fadeOut"
+                            > -->
+                                <div class="flex  justify-between" v-if="InvoiceGetConcepto.label.includes('Servicios')"
+                                    transition-show="fadeIn"
+                                    transition-hide="fadeOut"
+                                >
+                                    <DateInvoice :label="'Servicio desde'"  class="q-ml-lg"/>
+                                    <DateInvoice :label="'Servicio hasta'"  class="q-ml-lg"/>
+                                </div>
+                            <!-- </transition> -->
                     </div>
 
                     <div class="row q-mt-lg">

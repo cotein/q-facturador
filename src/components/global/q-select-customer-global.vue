@@ -38,13 +38,15 @@
                     <q-select outlined v-model="search_number" :options="Options" label="Concepto" :dense="true"/>
                 </q-card-section>
 
+                <DisplayPersonData />
             </q-card>
         </q-dialog>
     </q-select>
 </template>
 <script>
 import {mapGetters} from 'vuex';
-import searchPeople from "./../../components/afip/SearchPerson.vue";
+import searchPeople from "./../../components/afip/SearchPerson";
+import DisplayPersonData from "./../../components/afip/DisplayPersonData";
 export default {
     
     name : 'QSelectCustomerGlobal',
@@ -56,7 +58,7 @@ export default {
         }
     },
     
-    components : {searchPeople},
+    components : {searchPeople, DisplayPersonData },
 
     data(){
         return{

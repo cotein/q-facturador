@@ -22,10 +22,10 @@ export default {
         
         this.setMessage('Cargando Clientes');
 
-        this.startLoading();
+        this.startSpinner();
 
         const customers_list = await this.$store.dispatch('getCustomers')
-            .finally(()=> this.stopLoading())  
+            .finally(()=> this.stopSpinner())  
 
         if (customers_list) {
             console.log('customers_list')

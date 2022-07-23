@@ -41,7 +41,7 @@
 
                     <div>
                         <q-btn 
-                            :loading="Loading"
+                            :loading="Spinner"
                             class="full-width" 
                             label="Aceptar" 
                             type="submit" 
@@ -74,7 +74,7 @@ export default {
 
         async login() {
 
-            this.startLoading();
+            this.startSpinner();
 
             this.disabled_Input();
 
@@ -90,7 +90,7 @@ export default {
             })
             .finally(() => {
                 this.enableInput();
-                this.stopLoading();
+                this.stopSpinner();
             });
 
             if (login) {

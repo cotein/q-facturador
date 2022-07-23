@@ -1,13 +1,13 @@
 <template>
     <q-table
         title="Listado de clientes"
-        :data="list"
+        :data="CustomerListGetter"
         :columns="Columns"
         row-key="name"
         class="q-mt-lg"
         no-data-label="Sin clientes para mostrar"
         loading-label="Búscando datos"
-        :loading="Loading"
+        :loading="Spinner"
     >
         <template v-slot:body="props">
             <q-tr :props="props">
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 const columns = [
     {
         name: 'last_name',
@@ -85,21 +86,18 @@ const columns = [
     },
 ]
 
-import buttonDeleteCustomer from './buttonDeleteCustomer.vue'
+import buttonDeleteCustomer from './buttonDeleteCustomer.vue';
 export default {
 
     name : 'table',
 
-    props : {
-        list : {
-            type : Array,
-            required : true
-        },
-    },
-
     components : {buttonDeleteCustomer},
 
     computed : {
+
+        ...mapGetters([
+            'CustomerListGetter'
+        ]),
 
         Columns(){
             return columns;

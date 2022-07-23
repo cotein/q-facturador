@@ -24,6 +24,19 @@
 <script>
 const essentialLinks = [
     {
+        label : 'Compañía',
+        links : 
+            [
+                {
+                    title : 'Detalle',
+                    caption : 'Caption',
+                    icon : 'group',
+                    link : 'empresa',
+                },
+            ]
+        
+    },
+    {
         label : 'Clientes',
         links : 
             [
@@ -31,7 +44,7 @@ const essentialLinks = [
                     title : 'Listado',
                     caption : 'Caption',
                     icon : 'group',
-                    link : 'customer',
+                    link : 'clientes',
                 },
                 {
                     title : 'Nuevo',
@@ -48,8 +61,8 @@ const essentialLinks = [
             ]
         
     },
-    {
-        label : 'provee',
+    /* {
+        label : 'Proveedores',
         links : 
             [
                 {
@@ -59,14 +72,14 @@ const essentialLinks = [
                     link : 'customer',
                 },
                 {
-                    title : 'Nuevo Cliente',
+                    title : 'Nuevo Proveedor',
                     caption : 'Caption',
                     icon : 'person',
                     link : 'new-user',
                 }
             ]
         
-    },
+    }, */
 ]
 export default {
   name: 'EssentialLink',

@@ -2,19 +2,19 @@ export default {
 
     data() {
         return {
-            loading: false,
+            spinner: false,
             message : ''
         };
     },
 
     methods: {
         
-        startLoading() {
-            this.loading = true;
+        startSpinner() {
+            this.spinner = true;
         },
 
-        stopLoading() {
-            this.loading = false;
+        stopSpinner() {
+            this.spinner = false;
         },
 
         setMessage(value){
@@ -25,8 +25,8 @@ export default {
 
     computed : {
 
-        Loading(){
-            return this.loading;
+        Spinner(){
+            return this.spinner;
         },
 
         Message(){

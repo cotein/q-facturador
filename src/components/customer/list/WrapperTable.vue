@@ -1,5 +1,5 @@
 <template>
-        <tableCustomer :list="CustomerListGetter" :loading="Loading"/>
+        <tableCustomer :list="CustomerListGetter" :loading="Spinner"/>
 </template>
 
 <script>
@@ -20,19 +20,17 @@ export default {
 
     async mounted(){
 
-        this.startLoading();
+        this.startSpinner();
         
         const customers = await this.$store.dispatch('getCustomers')
             .catch(err => {
                 console.log(err)
-            })
-            .finally(() => {
-                this.stopLoading();
+                this.stopSpinner();
             })
         
         if (customers) {
             this.$store.dispatch('set_customer_list', customers.data)
-            
+            this.stopSpinner();
         }
     }
 }

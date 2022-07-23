@@ -37,7 +37,7 @@
                 <q-card-section>
                     <div class="row justify-between">
                         <q-input class="col-md-9" outlined dense v-model="saleCondition" label="Condición de venta" />
-                        <q-btn :loading="Loading" color="secondary" @click="saveCondition" label="Button" />
+                        <q-btn :loading="Spinner" color="secondary" @click="saveCondition" label="Button" />
                     </div>
                 </q-card-section>
             </q-card>
@@ -62,11 +62,11 @@ export default {
 
         async saveCondition(){
 
-            this.startLoading();
+            this.startSpinner();
             
             const saleCondition = await this.$store.dispatch('createTermOfSale', {term : this.saleCondition})
                 .catch((err) => console.log(err.response.data))
-                .finally(()=> this.stopLoading())
+                .finally(()=> this.stopSpinner())
             
             if (saleCondition) {
                 console.log(saleCondition)

@@ -5,12 +5,12 @@
         label="DNI - CUIL - CUIT" 
         counter 
         maxlength="11" 
-        :dense="dense"
+        dense="dense"
         :rules="[val => isNumeric(val) || 'Sólo se aceptan números', val => length(val) || 'El número debe contener al menos 6 caracteres']"
     >
         <template v-slot:append>
             <q-btn round dense flat icon="search" 
-                :loading="Loading"
+                :loading="Spinner"
                 @click="searchPersonAtAFIP"
                 :disabled="! isNumeric(search_number)"
             >
@@ -71,17 +71,17 @@ export default {
 
         async searchPerson(number){
 
-            this.startLoading();
+            this.startSpinner();
 
             const person = await this.$store.dispatch('searchPersonAtAFIP', number)
                 .catch((err)=>{
                     this.$q.notify({
                         type: 'negative',
-                        message: err.response.data,
+                        message: err.response.data.message,
                         icon: 'info'
                     });
                 })
-                .finally(()=>this.stopLoading());
+                .finally(()=>this.stopSpinner());
             if (person) {
                 
                 return person;

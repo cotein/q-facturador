@@ -361,16 +361,11 @@ export default {
                         message = errors;
                     }
 
-                    Vue.swal.fire({
-                        title: 'Ingreso de clientes',
-                        text : message,
-                        icon : 'error',
-                        width : '35%',
-                        padding : '2rem',
-                        backdrop : true,
-                        time : 2000
+                    this.$q.notify({
+                        type: 'negative',
+                        message: message,
+                        icon: 'info'
                     });
-
                     this.person = person.personaReturn.errorConstancia
 
                     if (errors == 'La clave ingresada no es una CUIT') {

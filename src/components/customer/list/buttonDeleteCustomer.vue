@@ -5,7 +5,7 @@
             color="red"
             icon="person_off"
             @click="open_dialog=true"
-            :loading="Loading"
+            :loading="Spinner"
         >
             <q-tooltip>
                 Eliminar cliente
@@ -46,12 +46,13 @@ export default {
 
         async deleteCustomer(){
 
-            this.startLoading();
+            this.startSpinner();
 
-            const response = await this.$store.dispatch('deleteCustomer', this.customer_id)
-                .finally(() => this.stopLoading())
+            const customer = await this.$store.dispatch('deleteCustomer', this.customer_id)
+                .finally(() => this.stopSpinner())
 
-            if (response) {
+            if (customer) {
+                this.$store.dispatch('removeCustomerFromList', customer.id);
                 this.$q.notify({
                     type: 'success',
                     message: 'Cliente eliminado correctamente',

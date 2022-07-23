@@ -19,8 +19,6 @@ export default {
         if (typeof query === 'object') {
             
             for (const key in query) {
-
-                console.log(`${key}: ${query[key]}`);
                 q[key] = query[key]
             }
 

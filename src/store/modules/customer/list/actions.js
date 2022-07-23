@@ -12,6 +12,8 @@ export const getCustomers = async (_) => {
     }
 }
 
+export const removeCustomerFromList = ({commit}, value) => commit('REMOVE_CUSTOMER_FROM_LIST', value);
+
 export const set_customer_list = ({commit}, value) => {
     commit('SET_CUSTOMERS_LIST', value);
 }
